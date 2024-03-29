@@ -1,13 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const User = require('./models/User');
+
 const app = express();
 
 app.use(express.json());
 
 const db = require("./db-config")
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
+const jwtSecret = process.env.JWT_SECRET;
 
 
 
@@ -28,6 +33,31 @@ const messageSchema = new mongoose.Schema({
     email: String,
     message: String,
 });
+
+// Define the Order schema
+const orderSchema = new mongoose.Schema({
+  user: String,
+  products: [
+    {
+      quantity: Number,
+      product: {
+        _id: String,
+        name: String,
+        price: Number,
+        description: String,
+        category: String,
+        images: [String],
+        createdAt: Date,
+        updatedAt: Date,
+      },
+    },
+  ],
+  totalPrice: Number,
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+}, { timestamps: true });
+
+
 // Schemas End
 
 
@@ -35,6 +65,7 @@ const messageSchema = new mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 const Message = mongoose.model('Message', messageSchema);
+const Order = mongoose.model('Order', orderSchema);
 // Models End
 
 
@@ -42,39 +73,45 @@ const Message = mongoose.model('Message', messageSchema);
 // API Requests
 
 
-// Get all products
+// GET all products
 app.get('/products/all', async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
 
 
-// Get specific product
-app.get('/products/:id', async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  res.json(product);
-});
-
-
-
-
-// Post products (in JSON format)
-app.post('/products', async (req, res) => {
-    const products = Array.isArray(req.body) ? req.body : [req.body];
-    const savedProducts = [];
-
-    for (let product of products) {
-        const newProduct = new Product(product);
-        try {
-            const savedProduct = await newProduct.save();
-            savedProducts.push(savedProduct);
-        } catch (err) {
-            return res.status(400).send(err);
-        }
+// GET specific product
+app.get('/products/:id', async (req, res, next) => {
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid product ID' });
+  }
+  try {
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
     }
-
-    res.status(201).json(savedProducts);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
 });
+
+
+
+// Error handling middleware for all other errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  if (err.name === 'ValidationError') {
+    return res.status(400).json({ error: err.message });
+  }
+
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+
+
 
 // Update product
 app.put('/products/:id', async (req, res) => {
@@ -88,6 +125,15 @@ app.delete('/products/:id', async (req, res) => {
   res.json({ message: 'Produkten har tagits bort' });
 });
 
+// POST Product/products
+app.post('/products', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(201).json(product);
+  } catch (err) {
+    next(err);
+  }
+});
 
 
 
@@ -134,6 +180,66 @@ app.get('/messages/:id', async (req, res) => {
   }
 });
 // API Requests End
+
+
+
+
+// Create the POST /orders route
+app.post('/orders', async (req, res) => {
+  try {
+    const order = new Order(req.body);
+    await order.save();
+    res.status(201).send(order);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+
+
+
+
+
+// Register
+app.post('/register', async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      username: req.body.username,
+      password: hashedPassword
+    });
+    const savedUser = await user.save();
+
+    res.status(201).json(savedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Login
+app.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid username or password' });
+    }
+
+    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!passwordMatch) {
+      return res.status(400).json({ error: 'Invalid username or password' });
+    }
+
+    const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+
 
 
 
