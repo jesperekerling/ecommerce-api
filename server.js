@@ -1,4 +1,3 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -13,10 +12,8 @@ const db = require("./db-config")
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-
-import dotenv from 'dotenv';
-import JWT_SECRET from 'jwt.env';
-const jwtSecret = process.env.JWT_SECRET;
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 /*
@@ -56,7 +53,7 @@ function authenticate(req, res, next) {
   }
 
   const token = parts[1];
-  jwt.verify(token, jwtSecret, (err, user) => {
+  jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) {
       return res.status(403).json({ error: 'Failed to authenticate token' });
     }
@@ -305,7 +302,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Invalid username or password' });
     }
 
-    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   } catch (err) {
     res.status(500).json({ error: err.message });
