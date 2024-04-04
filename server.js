@@ -1,3 +1,4 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -12,7 +13,60 @@ const db = require("./db-config")
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+
+import dotenv from 'dotenv';
+import JWT_SECRET from 'jwt.env';
 const jwtSecret = process.env.JWT_SECRET;
+
+
+/*
+
+API Requests
+(API URL / Functionality)
+
+/products/all - GET all products
+/produtcs/:id - GET specific product from ID
+/products - POST create product
+/products/:id - PUT update product
+/products/:id - DELETE delete product
+
+/messages/all - GET all messages
+/messages/:id - GET specific message
+/message - POST send message
+
+/orders - GET all orders (Bearer token required)
+/orders - POST create order (Bearer token required)
+
+/register - POST register user
+/login - POST login user
+
+
+*/
+
+
+function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  const parts = authHeader.split(' ');
+  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    return res.status(401).json({ error: 'Token error' });
+  }
+
+  const token = parts[1];
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Failed to authenticate token' });
+    }
+
+    req.user = user;
+    next();
+  });
+}
+
+
 
 
 
@@ -184,10 +238,14 @@ app.get('/messages/:id', async (req, res) => {
 
 
 
-// Create the POST /orders route
-app.post('/orders', async (req, res) => {
+// POST /orders route
+app.post('/orders', authenticate, async (req, res) => {
   try {
-    const order = new Order(req.body);
+    const order = new Order({
+      user: req.user.id, // Use the user ID from the token
+      products: req.body.products,
+      totalPrice: req.body.totalPrice,
+    });
     await order.save();
     res.status(201).send(order);
   } catch (error) {
@@ -195,7 +253,19 @@ app.post('/orders', async (req, res) => {
   }
 });
 
-
+// GET /orders route
+app.get('/orders', authenticate, async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user.id });
+    if (orders.length === 0) {
+      res.status(200).send('No orders yet.');
+    } else {
+      res.status(200).send(orders);
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 
 
@@ -203,6 +273,12 @@ app.post('/orders', async (req, res) => {
 // Register
 app.post('/register', async (req, res) => {
   try {
+    // Check if a user with the provided username already exists
+    const existingUser = await User.findOne({ username: req.body.username });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already taken' });
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       username: req.body.username,
@@ -229,7 +305,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Invalid username or password' });
     }
 
-    const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1h' });
     res.json({ token });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -237,10 +313,12 @@ app.post('/login', async (req, res) => {
 });
 
 
+// Get if token is valid
+app.get('/check-token', authenticate, (req, res) => {
+  res.status(200).send({ valid: true, userId: req.user.id });
+});
 
 
 
 
-
-
-app.listen(3000, () => console.log('Servern körs på port 3000'));
+app.listen(3000, () => console.log('Server started at port 3000'));
