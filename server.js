@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const User = require('./models/User');
+const Product = require('./models/Products');
 
 const app = express();
 
@@ -69,15 +70,7 @@ function authenticate(req, res, next) {
 
 // Schemas
 
-const productSchema = new mongoose.Schema({
-    name: String,
-    price: Number,
-    description: String,
-    category: String,
-    images: [String],
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
-}, { timestamps: true });
+
 
 const messageSchema = new mongoose.Schema({
     name: String,
@@ -114,7 +107,7 @@ const orderSchema = new mongoose.Schema({
 
 // Models
 
-const Product = mongoose.model('Product', productSchema);
+
 const Message = mongoose.model('Message', messageSchema);
 const Order = mongoose.model('Order', orderSchema);
 // Models End
