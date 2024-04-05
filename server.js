@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const User = require('./models/User');
 const Product = require('./models/Products');
+const Message = require('./models/Messages');
 
 const app = express();
 
@@ -71,35 +72,7 @@ function authenticate(req, res, next) {
 // Schemas
 
 
-
-const messageSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    message: String,
-});
-
 // Define the Order schema
-const orderSchema = new mongoose.Schema({
-  user: String,
-  products: [
-    {
-      quantity: Number,
-      product: {
-        _id: String,
-        name: String,
-        price: Number,
-        description: String,
-        category: String,
-        images: [String],
-        createdAt: Date,
-        updatedAt: Date,
-      },
-    },
-  ],
-  totalPrice: Number,
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-}, { timestamps: true });
 
 
 // Schemas End
@@ -108,7 +81,7 @@ const orderSchema = new mongoose.Schema({
 // Models
 
 
-const Message = mongoose.model('Message', messageSchema);
+
 const Order = mongoose.model('Order', orderSchema);
 // Models End
 
@@ -246,7 +219,7 @@ app.post('/orders', authenticate, async (req, res) => {
 // GET /orders route
 app.get('/orders', authenticate, async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user.id });
+    const orders = await Order.find({ user: req.user.id }).populate('products.product');
     if (orders.length === 0) {
       res.status(200).send('No orders yet.');
     } else {
