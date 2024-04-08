@@ -265,6 +265,6 @@ app.get('/check-token', authenticate, (req, res) => {
 });
 
 
-
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.listen(3000, () => console.log('Server started at port 3000'));
