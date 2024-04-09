@@ -74,14 +74,14 @@ function authenticate(req, res, next) {
 
 
 // GET all products
-app.get('/products/all', async (req, res) => {
+app.get('/api/products/all', async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
 
 
 // GET specific product
-app.get('/products/:id', async (req, res, next) => {
+app.get('/api/products/:id', async (req, res, next) => {
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: 'Invalid product ID' });
@@ -114,19 +114,19 @@ app.use((err, req, res, next) => {
 
 
 // Update product
-app.put('/products/:id', async (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
   const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.json(product);
 });
 
 // Delete product
-app.delete('/products/:id', async (req, res) => {
+app.delete('/api/products/:id', async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.json({ message: 'Produkten har tagits bort' });
 });
 
 // POST Product/products
-app.post('/products', async (req, res, next) => {
+app.post('/api/products', async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
     res.status(201).json(product);
@@ -138,7 +138,7 @@ app.post('/products', async (req, res, next) => {
 
 
 // Send message
-app.post('/message', async (req, res) => {
+app.post('/api/message', async (req, res) => {
     const { name, email, message } = req.body;
     if (!name || !email || !message) {
       res.status(400).json({ message: 'Alla fält måste fyllas i' });
@@ -150,7 +150,7 @@ app.post('/message', async (req, res) => {
   });
 
 // Get all messages
-app.get('/messages/all', async (req, res) => {
+app.get('/api/messages/all', async (req, res) => {
   try {
       const messages = await Message.find();
       res.status(200).json(messages);
@@ -160,7 +160,7 @@ app.get('/messages/all', async (req, res) => {
 });
 
 // Get specific message
-app.get('/messages/:id', async (req, res) => {
+app.get('/api/messages/:id', async (req, res) => {
   const id = req.params.id;
 
   // Check if the provided ID is valid
@@ -185,7 +185,7 @@ app.get('/messages/:id', async (req, res) => {
 
 
 // POST /orders route
-app.post('/orders', authenticate, async (req, res) => {
+app.post('/api/orders', authenticate, async (req, res) => {
   try {
     const order = new Order({
       user: req.user.id, // Use the user ID from the token
@@ -200,7 +200,7 @@ app.post('/orders', authenticate, async (req, res) => {
 });
 
 // GET /orders route
-app.get('/orders', authenticate, async (req, res) => {
+app.get('/api/orders', authenticate, async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user.id });
     if (orders.length === 0) {
@@ -217,7 +217,7 @@ app.get('/orders', authenticate, async (req, res) => {
 
 
 // Register
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   try {
     // Check if a user with the provided username already exists
     const existingUser = await User.findOne({ username: req.body.username });
@@ -239,7 +239,7 @@ app.post('/register', async (req, res) => {
 });
 
 // Login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
@@ -260,11 +260,11 @@ app.post('/login', async (req, res) => {
 
 
 // Get if token is valid
-app.get('/check-token', authenticate, (req, res) => {
+app.get('/api/check-token', authenticate, (req, res) => {
   res.status(200).send({ valid: true, userId: req.user.id });
 });
 
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/api/", (req, res) => res.send("Express on Vercel"));
 
 app.listen(8080, () => console.log('Server started at port 7000'));
