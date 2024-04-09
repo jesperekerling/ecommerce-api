@@ -238,7 +238,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-/*
+
 // Login
 app.post('/api/login', async (req, res) => {
   try {
@@ -258,7 +258,6 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-*/
 
 
 // Get if token is valid
