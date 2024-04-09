@@ -238,6 +238,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+/*
 // Login
 app.post('/api/login', async (req, res) => {
   try {
@@ -257,6 +258,7 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+*/
 
 
 // Get if token is valid
@@ -267,4 +269,4 @@ app.get('/api/check-token', authenticate, (req, res) => {
 
 app.get("/api/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(8080, () => console.log('Server started at port 7000'));
+app.listen(7000, () => console.log('Server started at port 7000'));
