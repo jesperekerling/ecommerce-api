@@ -276,3 +276,4 @@ app.use(express.static(path.join(__dirname,"dist")))
 
 app.listen(PORT, () => console.log('Server started at port 7000'));
 
+module.exports = app
