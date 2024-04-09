@@ -18,6 +18,8 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const path = require('path')
+
 
 /*
 
@@ -270,4 +272,7 @@ const PORT = process.env.PORT || 7000
 
 app.get("/api/", (req, res) => res.send("Express on Vercel"));
 
+app.use(express.static(path.join(__dirname,"dist")))
+
 app.listen(PORT, () => console.log('Server started at port 7000'));
+

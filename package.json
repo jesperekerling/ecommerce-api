@@ -1,4 +1,14 @@
 {
+  "name": "backend-api",
+  "version": "1.0.0",
+  "description": "API Requests\r (API URL / Functionality)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
