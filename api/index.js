@@ -26,13 +26,13 @@ const path = require('path')
 API Requests
 (API URL / Functionality)
 
-/products/all - GET all products
+/products - GET all products
 /produtcs/:id - GET specific product from ID
 /products - POST create product
 /products/:id - PUT update product
 /products/:id - DELETE delete product
 
-/messages/all - GET all messages
+/messages - GET all messages
 /messages/:id - GET specific message
 /message - POST send message
 
