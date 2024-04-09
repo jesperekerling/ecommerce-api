@@ -4,6 +4,7 @@
   "description": "API Requests\r (API URL / Functionality)",
   "main": "server.js",
   "scripts": {
+    "build": "",
     "start": "node server.js"
   },
   "keywords": [],
