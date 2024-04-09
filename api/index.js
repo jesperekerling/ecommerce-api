@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-const db = require("./db-config")
+const db = require("./../db-config")
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
