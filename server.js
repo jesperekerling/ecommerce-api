@@ -265,7 +265,9 @@ app.get('/api/check-token', authenticate, (req, res) => {
   res.status(200).send({ valid: true, userId: req.user.id });
 });
 
+const PORT = process.env.PORT || 7000
+
 
 app.get("/api/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(7000, () => console.log('Server started at port 7000'));
+app.listen(PORT, () => console.log('Server started at port 7000'));
