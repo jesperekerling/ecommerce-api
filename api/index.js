@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://app.netlify.com/sites/ecommerce-in-react-school/' // replace with your Netlify site URL
+  origin: 'https://ecommerce.ekerling.com/'
 }));
 
 const db = require("./../db-config")
