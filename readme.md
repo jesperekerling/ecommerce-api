@@ -13,11 +13,11 @@ https://ecommerce-api.ekerling.com/ (Documentation + API URL)
 (API URL / Functionality)<br /><br />
 
 /products - GET all products<br />
-/produtcss/:id - GET specific product from ID<br />
+/produtcs/:id - GET specific product from ID<br />
 /products/:id - PUT update product<br />
 /products/:id - DELETE delete product<br /><br />
 
-/message - POST send messagev
+/message - POST send message
 /messages - GET all messages<br />
 /messages/:id - GET specific message<br /><br />
 

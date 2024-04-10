@@ -1021,6 +1021,11 @@ p {
   margin: 1.5rem 0 2rem;
 }
 
+.copy-button svg {
+  width: 30px;
+  height: 30px;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
