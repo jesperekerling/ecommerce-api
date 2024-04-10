@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -12,10 +13,11 @@ app.use(express.json());
 
 const db = require("./../db-config")
 
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-require('dotenv').config();
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const path = require('path')
