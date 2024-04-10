@@ -5,9 +5,7 @@ const productSchema = new mongoose.Schema({
   price: Number,
   description: String,
   category: String,
-  images: [String],
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+  images: [String]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);

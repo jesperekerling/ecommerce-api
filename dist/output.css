@@ -1022,8 +1022,10 @@ p {
 }
 
 .copy-button svg {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+  fill: #666;
+  margin-left: 1rem;
 }
 
 .hover\:scale-105:hover {

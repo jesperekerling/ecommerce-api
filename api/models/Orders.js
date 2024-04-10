@@ -11,11 +11,7 @@ const ordersSchema = new mongoose.Schema({
         },
       },
     ],
-    totalPrice: Number,
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+    totalPrice: Number
   }, { timestamps: true });
-  
 
 module.exports = mongoose.model('Orders', ordersSchema);
-

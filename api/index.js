@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
 const User = require('./models/User');
@@ -221,7 +222,18 @@ app.get('/api/orders', authenticate, async (req, res) => {
 
 
 // Register
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', [
+  // username must be an email
+  body('username').isEmail().withMessage('Username must be an email'),
+  // password must be at least 5 chars long
+  body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters')
+], async (req, res) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     // Check if a user with the provided username already exists
     const existingUser = await User.findOne({ username: req.body.username });
@@ -229,10 +241,9 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ error: 'Username already taken' });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       username: req.body.username,
-      password: hashedPassword
+      password: req.body.password // No need to hash here, the middleware will take care of it
     });
     const savedUser = await user.save();
 
@@ -250,6 +261,8 @@ app.post('/api/login', async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: 'Invalid username or password' });
     }
+
+    console.log(`Hashed password during login: ${user.password}`); // Log the hashed password
 
     const passwordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passwordMatch) {
