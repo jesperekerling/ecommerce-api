@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <link rel="icon" href="https://ekerling.com/favicon.ico" type="image/x-icon">
+  <!-- CSS Toastify -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+  <!-- JavaScript Toastify -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
@@ -58,13 +63,13 @@
 
             <ul role="list" class="pl-3 mt-3 space-y-2">
               <li>
-                <a href="#get-products" class="text-slate-900 hover:text-slate-800">
+                <a href="#get-products" class="text-slate-600 hover:text-slate-800">
                   GET Products
                 </a>
               </li>
 
               <li>
-                <a href="#get-products-by-id" class="text-slate-900 hover:text-slate-800">
+                <a href="#get-products-by-id" class="text-slate-600 hover:text-slate-800">
                   GET Product by ID
                 </a>
               </li>
@@ -91,7 +96,7 @@
 
           <li>
             <h3 class="font-semibold tracking-tight text-slate-900">
-              Orders
+              <a href="#orders">Orders</a>
             </h3>
 
             <ul role="list" class="pl-3 mt-3 space-y-2">
@@ -168,12 +173,34 @@
 
           <p>This is a documentation for my <a href="https://github.com/jesperekerling/ecommerce-api" target="_blank" class="font-semibold">Ecommerce API</a>. This API is built to serve data to my other project: <a href="https://github.com/jesperekerling/react-ecommerce" target="_blank" class="font-semibold">Ecommerce website in React</a> (Front End).</p>
           <p>The purpose of this API is to handle and control the requests between our MongoDB database and the Front End website.</p>
+          <p><strong>API URL</strong><br>
+            <a href="https://ecommerce-api.ekerling.com/api">https://ecommerce-api.ekerling.com/api</a>
+            <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/">
+              <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+    viewBox="0 0 460 460" xml:space="preserve">
+                <g>
+                  <g>
+                    <g>
+                      <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                        c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                        c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                      <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                        c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                        c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                        C291.206,428.715,289.92,430,288.341,430z"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </p>
           
+          <hr class="mb-10">
 
-          <h2 class="font-bold  mt-14 mb-5" id="products">Products</h2>
+          <h2 class="font-bold  mt-14 mb-10" id="products">Products</h2>
           
-          <h3 id="get-products"><a href="/api/products/" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/products</a>
-            <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products/">
+          <h3 id="get-products"><a href="/api/products" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> <a href="/api/products">/api/products</a>
+            <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products">
               <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
     viewBox="0 0 460 460" xml:space="preserve">
                 <g>
@@ -193,51 +220,330 @@
             </button>
           </h3>
           <p>Retrieves all products.</p>
+          <h4>Responses</h4>
+          <p class="mb-10">200 - OK<br>
+          500 - Internal Error</p>
+
+          <hr class="mb-10">
           
-          <h3 id="get-products-by-id"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/products/:id</h3>
+          <h3 id="get-products-by-id"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> <a href="/api/products/{id}">/api/products/{id}</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products{id}">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Retrieves a specific product by its ID.</p>
+          <h4>Responses</h4>
+          <p class="mb-10">200 - OK<br>
+          400 - Invalid Product ID<br>
+          404 - Product not found<br>
+          500 - Internal Server Error</p>
+
+          <hr class="mb-10">
+
           
-          <h3 id="post-products"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/products</h3>
+          <h3 id="post-products"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> <a href="/api/products">/api/products</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Creates a new product. The product data should be provided in the request body.</p>
-          
-          <h3 id="put-products"><span class="font-bold bg-slate-700 rounded-lg text-white py-2 px-3 mr-3">PUT</span> /api/products/:id</h3>
+
+          <h4>Responses</h4>
+          <p class="mb-10">201 - OK, product added<br>
+          404 - Product not found<br>
+          500 - Internal Error</p>
+
+          <hr class="mb-10">
+
+          <h3 id="put-products"><span class="font-bold bg-slate-700 rounded-lg text-white py-2 px-3 mr-3">PUT</span> <a href="/api/products/{id}">/api/products/{id}</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products{id}">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Updates a specific product by its ID. The updated product data should be provided in the request body.</p>
           
-          <h3 id="delete-product"><span class="font-bold bg-red-800 rounded-lg text-white py-2 px-3 mr-3">DELETE</span> /api/products/:id</h3>
+          <h3 id="delete-product"><span class="font-bold bg-red-800 rounded-lg text-white py-2 px-3 mr-3">DELETE</span> <a href="/api/products/{id}">/api/products/{id}</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/products/{id}">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Deletes a specific product by its ID.</p>
           
 
           <h2 id="messages" class="font-bold mt-14 mb-5">Messages</h2>
           <p>Messages are used for communication between users and the site owner.</p>
           
-          <h3 id="get-messages"><a href="/api/messages" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/messages</a></h3>
+          <h3 id="get-messages"><a href="/api/messages" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> <a href="/api/messages">/api/messages</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/messages">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Retrieves all messages.</p>
+          <h4>Response</h4>
+          <pre>
+            <code>
+[
+    {
+        "_id": "6605622837a4902c3e5fa415",
+        "name": "Name",
+        "email": "email@ekerling.com",
+        "message": "Message text here",
+        "__v": 0
+    },
+    {
+        "_id": "660570ca5439446e1e0b4772",
+        "name": "Super Man",
+        "email": "hey@email.com",
+        "message": "Message text here",
+        "__v": 0
+    },
+    {
+        "_id": "66073908faa362a72b1c5645",
+        "name": "John Smith",
+        "email": "john@smith.com",
+        "message": "Message text here",
+
+        "__v": 0
+    }
+]
+            </code>
+          </pre>
+          <h4>Response codes</h4>
+          <p class="mb-10">200 - OK<br>
+            404 - Product not found<br>
+            500 - Internal Error</p>
+  
+            <hr class="mb-10">
           
-          <h3 id="get-message"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/messages/:id</h3>
+          <h3 id="get-message"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> <a href="/api/messages/{id}">/api/messages/{id}</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/messages/{id}">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Retrieves a specific message by its ID.</p>
+          <h4>Request Body</h4>
+          <pre><code>{
+    "name": "Test name",
+    "email": "name@email.com",
+    "message": "This is a message"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+    "_id": "66170ac311140c69e87b5ee9",
+    "name": "Test name",
+    "email": "name@email.com",
+    "message": "This is a message",
+    "createdAt": "2024-04-10T21:55:15.933Z",
+    "updatedAt": "2024-04-10T21:55:15.933Z",
+    "__v": 0
+}</code></pre>
+          <h4>Response codes</h4>
+          <p class="mb-10">200 - OK<br>
+            404 - Product not found<br>
+            500 - Internal Error</p>
+  
+            <hr class="mb-10">
           
-          <h3 id="post-message"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/message</h3>
+          <h3 id="post-message"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> <a href="/api/message">/api/message</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/message">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Sends a new message. The message data should be provided in the request body.</p>
-          
+          <h4>Request Body</h4>
+          <pre><code>{
+    "name": "Test name",
+    "email": "name@email.com",
+    "message": "This is a message"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+    "message": "Message delivered and saved to database."
+}</code></pre>
+          <h4>Response codes</h4>
+          <p class="mb-10">200 - OK<br>
+            404 - Product not found<br>
+            500 - Internal Error</p>
+  
+            <hr class="mb-10">
 
 
 
           <h2 id="orders" class="font-bold mt-14 mb-5">Orders</h2>
           
-          <h3 id="post-order"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/orders</h3>
+          <h3 id="post-order"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> <a href="/api/orders">/api/orders</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/orders">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Creates a new order. The order data should be provided in the request body. Requires a Bearer token for authentication.</p>
      
-          <h3 id="get-order"><a href="/api/orders" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/orders</a></h3>
+          <h3 id="get-order"><a href="/api/orders" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> <a href="/api/orders">/api/orders</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/orders">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Retrieves all orders. Requires a Bearer token for authentication.</p>
           
 
 
           <h2 id="auth" class="font-bold mt-14 mb-5">User Registration and Login</h2>
           
-          <h3 id="register"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/register</h3>
+          <h3 id="register"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> <a href="/api/register">/api/register</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/register">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Registers a new user. The user data should be provided in the request body.</p>
           
-          <h3 id="login"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/login</h3>
+          <h3 id="login"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> <a href="/api/login">/api/login</a> <button class="copy-button" data-copy="https://ecommerce-api.ekerling.com/api/login">
+            <svg class="copy-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  viewBox="0 0 460 460" xml:space="preserve">
+              <g>
+                <g>
+                  <g>
+                    <path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+                      c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+                      c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"/>
+                    <path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+                      c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+                      c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+                      C291.206,428.715,289.92,430,288.341,430z"/>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button></h3>
           <p>Logs in a user. The user credentials should be provided in the request body.</p>
 
         </header>
@@ -257,7 +563,7 @@
           </div>
         </div>
         <div class="mt-1">
-          <a href="#" class="text-base font-semibold text-slate-900 hover:underline" href="https://ekerling.com">
+          <a class="text-base font-semibold text-slate-900 hover:underline" href="https://ekerling.com">
             ekerling.com</a>
           </a>
         </div>
@@ -267,13 +573,24 @@
 
   <script type="text/javascript">
     document.querySelectorAll('.copy-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const url = button.getAttribute('data-copy');
-        navigator.clipboard.writeText(url).then(() => {
-          alert('URL copied to clipboard');
-        }).catch(err => {
-          console.error('Could not copy URL: ', err);
-        });
+      button.addEventListener('click', function(event) {
+        const copyText = this.getAttribute('data-copy');
+        const textarea = document.createElement('textarea');
+        textarea.value = copyText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        // Use toastify.js to show a toast notification
+        Toastify({
+          text: "Copied to clipboard!",
+          duration: 3000,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: 'right', // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to right, #222, #000)",
+        }).showToast();
       });
     });
   </script>

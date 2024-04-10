@@ -112,7 +112,7 @@ app.put('/api/products/:id', async (req, res) => {
 // Delete product
 app.delete('/api/products/:id', async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
-  res.json({ message: 'Produkten har tagits bort' });
+  res.json({ message: 'Product deleted' });
 });
 
 // POST Product/products
@@ -131,11 +131,11 @@ app.post('/api/products', async (req, res, next) => {
 app.post('/api/message', async (req, res) => {
     const { name, email, message } = req.body;
     if (!name || !email || !message) {
-      res.status(400).json({ message: 'Alla fält måste fyllas i' });
+      res.status(400).json({ message: 'All fields needs to have data.' });
     } else {
       const newMessage = new Message({ name, email, message });
       await newMessage.save();
-      res.status(200).json({ message: 'Meddelandet har skickats och sparats i databasen.' });
+      res.status(200).json({ message: 'Message delivered and saved to database.' });
     }
   });
 
