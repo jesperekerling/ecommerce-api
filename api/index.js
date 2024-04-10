@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const rateLimit = require("express-rate-limit");
 
 const User = require('./models/User');
 const Product = require('./models/Products');
@@ -24,30 +25,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const path = require('path')
 
 
-/*
-
-API Requests
-(API URL / Functionality)
-
-/products - GET all products
-/produtcs/:id - GET specific product from ID
-/products - POST create product
-/products/:id - PUT update product
-/products/:id - DELETE delete product
-
-/messages - GET all messages
-/messages/:id - GET specific message
-/message - POST send message
-
-/orders - GET all orders (Bearer token required)
-/orders - POST create order (Bearer token required)
-
-/register - POST register user
-/login - POST login user
 
 
-*/
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
 
+app.use(limiter); // Apply to all routes
 
 function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -254,8 +239,20 @@ app.post('/api/register', [
 });
 
 
+
 // Login
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', [
+  // username must be an email
+  body('username').isEmail().withMessage('Username must be an email'),
+  // password must not be empty
+  body('password').notEmpty().withMessage('Password is required')
+], async (req, res) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
