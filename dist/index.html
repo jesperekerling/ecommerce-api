@@ -162,57 +162,65 @@
             Getting started
           </p>
 
-          <h1 class="font-bold my-12">API Documentation</h1>
+          <h1 class="font-bold mt-10 mb-10">API Documentation</h1>
 
-          <h2 class="font-bold mb-5" id="products">Products</h2>
+          <p>This is a documentation for my <a href="https://github.com/jesperekerling/ecommerce-api" target="_blank" class="font-semibold">Ecommerce API</a>. This API is built to serve data to my other project: <a href="https://github.com/jesperekerling/react-ecommerce" target="_blank" class="font-semibold">Ecommerce website in React</a> (Front End).</p>
+          <p>The purpose of this API is to handle and control the requests between our Mongo Datebase and the Front End website.</p>
           
-          <h3 id="get-products"><a href="/api/products/" target="_blank">GET /api/products</a></h3>
+
+          <h2 class="font-bold  mt-14 mb-5" id="products">Products</h2>
+          
+          <h3 id="get-products"><a href="/api/products/" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/products</a></h3>
           <p>Retrieves all products.</p>
           
-          <h3 id="get-products-by-id">GET /api/products/:id</h3>
+          <h3 id="get-products-by-id"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/products/:id</h3>
           <p>Retrieves a specific product by its ID.</p>
           
-          <h3 id="post-products">POST /api/products</h3>
+          <h3 id="post-products"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/products</h3>
           <p>Creates a new product. The product data should be provided in the request body.</p>
           <pre>
             &lt;HTML&gt;
             
           </pre>
           
-          <h3 id="put-products">PUT /api/products/:id</h3>
+          <h3 id="put-products"><span class="font-bold bg-slate-700 rounded-lg text-white py-2 px-3 mr-3">PUT</span> /api/products/:id</h3>
           <p>Updates a specific product by its ID. The updated product data should be provided in the request body.</p>
           
-          <h3 id="delete-product">DELETE /api/products/:id</h3>
+          <h3 id="delete-product"><span class="font-bold bg-red-800 rounded-lg text-white py-2 px-3 mr-3">DELETE</span> /api/products/:id</h3>
           <p>Deletes a specific product by its ID.</p>
           
 
-          <h2 id="messages" class="font-bold mb-5">Messages</h2>
+          <h2 id="messages" class="font-bold mt-14 mb-5">Messages</h2>
           <p>Messages are used for communication between users and the site owner.</p>
           
-          <h3 id="get-messages"><a href="/api/messages" target="_blank">GET /api/messages</a></h3>
+          <h3 id="get-messages"><a href="/api/messages" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/messages</a></h3>
           <p>Retrieves all messages.</p>
           
-          <h3 id="get-message">GET /api/messages/:id</h3>
+          <h3 id="get-message"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/messages/:id</h3>
           <p>Retrieves a specific message by its ID.</p>
           
-          <h3 id="post-message">POST /api/message</h3>
+          <h3 id="post-message"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/message</h3>
           <p>Sends a new message. The message data should be provided in the request body.</p>
           
 
-          <h2 id="orders" class="font-bold mb-5">Orders</h2>
+
+
+          <h2 id="orders" class="font-bold mt-14 mb-5">Orders</h2>
           
-          <h3 id="post-order">POST /api/orders</h3>
+          <h3 id="post-order"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/orders</h3>
           <p>Creates a new order. The order data should be provided in the request body. Requires a Bearer token for authentication.</p>
      
-          <h3 id="get-order"><a href="/api/orders" target="_blank">GET /api/orders</a></h3>
+          <h3 id="get-order"><a href="/api/orders" target="_blank"><span class="font-bold bg-green-950 rounded-lg text-white py-2 px-3 mr-3">GET</span> /api/orders</a></h3>
           <p>Retrieves all orders. Requires a Bearer token for authentication.</p>
           
-          <h2 id="auth" class="font-bold mb-5">User Registration and Login</h2>
+
+
+          <h2 id="auth" class="font-bold mt-14 mb-5">User Registration and Login</h2>
           
-          <h3 id="register">POST /api/register</h3>
+          <h3 id="register"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/register</h3>
           <p>Registers a new user. The user data should be provided in the request body.</p>
           
-          <h3 id="login">POST /api/login</h3>
+          <h3 id="login"><span class="font-bold bg-black rounded-lg text-white py-2 px-3 mr-3">POST</span> /api/login</h3>
           <p>Logs in a user. The user credentials should be provided in the request body.</p>
 
         </header>
@@ -228,7 +236,7 @@
 
         <div class="ml-auto pb-5 text-left">
           <div class="text-sm font-normal tracking-tight text-slate-600">
-            Last updated: 9 apr, 2024
+            Last updated: 10 apr, 2024
           </div>
         </div>
         <div class="mt-1">

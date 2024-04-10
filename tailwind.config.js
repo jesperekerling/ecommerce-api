@@ -3,9 +3,7 @@
 // tailwind.config.js
 module.exports = {
   content: [
-    './**/*.html',
-    './**/*.js',
-    // Add paths to all of the templates and components in your project
+    './dist/*.html'
   ],
   theme: {
     extend: {},
