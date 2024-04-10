@@ -13,7 +13,7 @@ const Order = require('./models/Orders');
 const app = express();
 
 app.use(cors({
-  origin: ['https://ecommerce.ekerling.com', 'http://localhost'],
+  origin: ['https://ecommerce.ekerling.com'],
   mode: 'cors',
   credentials: true,
 }));
