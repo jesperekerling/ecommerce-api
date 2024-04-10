@@ -3,6 +3,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 const rateLimit = require("express-rate-limit");
+const cors = require('cors');
 
 const User = require('./models/User');
 const Product = require('./models/Products');
@@ -12,6 +13,8 @@ const Order = require('./models/Orders');
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 const db = require("./../db-config")
 
