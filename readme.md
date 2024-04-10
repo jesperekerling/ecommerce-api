@@ -1,4 +1,15 @@
-API Requests
+# API Backend
+
+A server in Express.js that handles requests for serving data for a Ecommerce website.
+This is a addon to my other school project: React Ecommerce (https://github.com/jesperekerling/react-ecommerce).
+
+# Live Demo
+https://ecommerce.ekerling.com/ (Front End using this API)
+https://ecommerce-api.ekerling.com/ (Documentation + API URL)
+
+# How to use
+
+# API Requests
 (API URL / Functionality)
 
 /products - GET all products
