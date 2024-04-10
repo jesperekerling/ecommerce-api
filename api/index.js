@@ -15,7 +15,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ['https://ecommerce.ekerling.com', 'http://localhost']
+  origin: ['https://ecommerce.ekerling.com', 'http://localhost'],
+  mode: 'cors',
+  credentials: 'include',
 }));
 
 const db = require("./../db-config")
