@@ -12,13 +12,15 @@ const Order = require('./models/Orders');
 
 const app = express();
 
-app.use(express.json());
-
 app.use(cors({
   origin: ['https://ecommerce.ekerling.com', 'http://localhost'],
   mode: 'cors',
-  credentials: 'include',
+  credentials: true,
 }));
+
+
+app.use(express.json());
+
 
 const db = require("./../db-config")
 
