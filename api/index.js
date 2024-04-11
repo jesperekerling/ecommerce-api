@@ -218,7 +218,7 @@ app.get('/api/orders', authenticate, async (req, res) => {
 // Register
 app.post('/api/register', [
   // username must be an email
-  body('username').isEmail().withMessage('Username must be an email'),
+  body('email').isEmail().withMessage('Username must be an email'),
   // password must be at least 5 chars long
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters')
 ], async (req, res) => {
@@ -230,13 +230,13 @@ app.post('/api/register', [
 
   try {
     // Check if a user with the provided username already exists
-    const existingUser = await User.findOne({ username: req.body.username });
+    const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(400).json({ error: 'Username already taken' });
     }
 
     const user = new User({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password // No need to hash here, the middleware will take care of it
     });
     const savedUser = await user.save();
@@ -252,7 +252,7 @@ app.post('/api/register', [
 // Login
 app.post('/api/login', [
   // username must be an email
-  body('username').isEmail().withMessage('Username must be an email'),
+  body('email').isEmail().withMessage('Username must be an email'),
   // password must not be empty
   body('password').notEmpty().withMessage('Password is required')
 ], async (req, res) => {
@@ -263,16 +263,16 @@ app.post('/api/login', [
   }
 
   try {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.email });
     if (!user) {
-      return res.status(400).json({ error: 'Invalid username or password' });
+      return res.status(400).json({ error: 'Invalid email or password' });
     }
 
     console.log(`Hashed password during login: ${user.password}`); // Log the hashed password
 
     const passwordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passwordMatch) {
-      return res.status(400).json({ error: 'Invalid username or password' });
+      return res.status(400).json({ error: 'Invalid email or password' });
     }
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
