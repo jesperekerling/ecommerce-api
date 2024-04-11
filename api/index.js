@@ -276,7 +276,7 @@ app.post('/api/login', [
     }
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({ token, id: user._id }); // Include user ID in the response
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
