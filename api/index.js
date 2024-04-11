@@ -263,7 +263,7 @@ app.post('/api/login', [
   }
 
   try {
-    const user = await User.findOne({ username: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
