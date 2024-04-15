@@ -7,7 +7,7 @@ This is a addon to my other school project: React Ecommerce (https://github.com/
 https://ecommerce.ekerling.com/ (Front End using this API)<br />
 https://ecommerce-api.ekerling.com/ (Documentation + API URL)
 
-### How to use (locally)
+# How to use (locally)
 
 - Install [Node.js platform](https://nodejs.org/en/)
 - Download the code from this Github repo
