@@ -203,9 +203,9 @@ app.get('/api/orders', authenticate, async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user.id }).populate('products.product');
     if (orders.length === 0) {
-      res.status(200).send('No orders yet.');
+      res.status(200).json('No orders yet.');
     } else {
-      res.status(200).send(orders);
+      res.status(200).json(orders);
     }
   } catch (error) {
     res.status(500).send(error);
